@@ -1,12 +1,9 @@
 pipeline {
     agent {
-        label 'docker-agent-node'
-    }
-    environment {
-        quangdung = 'hello'
-        lede = 'conchongu'
-        username = 'quangdung2110'
-        docker_image = 'my-websocket-app'
+        docker {
+            image 'quangdung2110/dind-test'
+            args '/var/run/docker.sock:/var/run/docker.sock'
+        }
     }
     stages {
         stage('show info') {
@@ -16,14 +13,9 @@ pipeline {
                 sh(script: "ls -al", label: "show structure of folder")
             }
         }
-        stage('install dependencies') {
+        stage('test-docker-compose') {
             steps {
-                sh(script: "npm install", label: "install dependencies")
-            }
-        }
-        stage('run app') {
-            steps {
-                sh(script: "npm start", label: "run project")
+                sh(script: "docker compose version", label: "show info about docker compose")
             }
         }
     }
