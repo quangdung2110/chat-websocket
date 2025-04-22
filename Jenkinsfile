@@ -3,10 +3,10 @@ pipeline {
         label 'docker-agent-node'
     }
     environment {
-        quangdung 'hello'
-        lede 'conchongu'
-        username 'quangdung2110'
-        docker_image 'my-websocket-app'
+        quangdung = 'hello'
+        lede = 'conchongu'
+        username = 'quangdung2110'
+        docker_image = 'my-websocket-app'
     }
     stages {
         stage('show info') {
