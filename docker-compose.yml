@@ -15,7 +15,7 @@ services:
 
   web:
     container-name: mynode-app
-    build .
+    build: .
     depends_on: 
       - db
       - redis
