@@ -1,13 +1,17 @@
-FROM jenkins/inbound-agent:latest-jdk17
+FROM node:22-alpine AS build
 
-USER root
+WORKDIR /app
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    apt-get clean
+COPY package*.json .
+RUN npm ci --omit=dev
+COPY . .
 
-RUN node -v && npm -v
+FROM node:22-alpine
 
-USER jenkins
+WORKDIR /app
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+COPY --from=build /app .
+RUN chown -R appuser:appgroup /app
+USER appuser:appgroup
 
-EXPOSE 3000
+CMD [ "npm", "start" ]
