@@ -1,6 +1,6 @@
 services:
   db:
-    container-name: postgresql
+    container_name: postgresql
     image: postgres
     environment:
       POSTGRES_PASSWORD: mypass
@@ -8,13 +8,13 @@ services:
       - "5432:5432"
 
   redis:
-    container-name: redis
+    container_name: redis
     image: redis
     ports:
       - "6379:6379"
 
   web:
-    container-name: mynode-app
+    container_name: mynode-app
     build: .
     depends_on: 
       - db
