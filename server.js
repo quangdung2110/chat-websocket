@@ -11,7 +11,7 @@ const io = socketio(server);
 
 const port = process.env.PORT || 3000;
 const chatBot = 'ADMIN';
-const hello = 'world7';
+const hello = 'world8';
 
 
 app.use(express.static(path.join(__dirname, 'public')));
